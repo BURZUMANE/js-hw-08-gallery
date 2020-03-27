@@ -84,14 +84,29 @@ function keyFunction(e){
         refs.lightBox.classList.remove('is-open');
     }else if(e.keyCode === 39){
         // refs.boxImage.setAttribute('src', src)
-        const nextItem = refs.currentClick.nextElementSibling;
+        let nextItem = refs.currentClick.nextElementSibling;
+        if(refs.currentClick.nextElementSibling === null){
+            console.log('right end');
+            nextItem = refs.currentClick.parentNode.firstElementChild;
+            console.log(nextItem);
+            refs.currentClick = refs.currentClick.parentNode.firstElementChild
+        }
+        
         const nextImage = nextItem.querySelector('.gallery__image').dataset.source;
         console.log(nextImage);
         refs.currentClick = refs.currentClick.nextElementSibling;
         refs.boxImage.setAttribute('src', nextImage);
     }else if(e.keyCode === 37){
         // refs.boxImage.setAttribute('src', src)
-        const nextItem = refs.currentClick.previousElementSibling;
+        let nextItem = refs.currentClick.previousElementSibling;
+        if(refs.currentClick.previousElementSibling === null){
+            console.log('left end');
+            nextItem = refs.currentClick.parentNode.lastElementChild;
+            console.log(nextItem);
+            refs.currentClick = refs.currentClick.parentNode.lastElementChild
+        }
+
+
         const nextImage = nextItem.querySelector('.gallery__image').dataset.source;
         console.log(nextImage);
         refs.boxImage.setAttribute('src', nextImage);
